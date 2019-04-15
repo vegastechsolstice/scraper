@@ -37,10 +37,10 @@ class ScraperService
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getProductName(): string
+    public function getItems(): array
     {
-        return $this->dellProductPage->retrieveProductName();
+        return $this->dellProductPage->scrape();
     }
 }

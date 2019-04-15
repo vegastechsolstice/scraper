@@ -6,6 +6,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class ScrapeCommand
+ * @package App\Command
+ */
 class ScrapeCommand extends Command
 {
     /**
@@ -34,10 +38,20 @@ class ScrapeCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Test this message');
-        $this->scraperService = new ScraperService('https://www.dell.com/en-us/shop/accessories/apd/210-agnk?c=us&l=en&s=dhs&cs=19&sku=210-AGNK');
-//        $this->scraperService = new ScraperService('https://google.com');
-        $output->write($this->scraperService->getProductName());
-        $output->writeln('Success');
+        $urls = [
+            'https://www.dell.com/en-us/shop/accessories/apd/210-agnk?c=us&l=en&s=dhs&cs=19&sku=210-AGNK',
+            'http://www.dell.com/en-us/shop/accessories/apd/341-2939?c=us&l=en&s=dhs&cs=19&sku=341-2939',
+            'http://www.dell.com/en-us/shop/accessories/apd/580-agjp?c=us&l=en&s=dhs&cs=19&sku=580-AGJP',
+        ];
+
+        foreach ($urls as $url) {
+            $output->writeln('Scraped Page Items:');
+            $this->scraperService = new ScraperService($url);
+
+            foreach ($this->scraperService->getItems() as $item) {
+                $output->writeln($item);
+            }
+            $output->writeln('');
+        }
     }
 }
