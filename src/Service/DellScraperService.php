@@ -5,10 +5,10 @@ use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class ScraperService
+ * Class DellScraperService
  * @package App\Service
  */
-class ScraperService
+class DellScraperService
 {
     /**
      * @var Client

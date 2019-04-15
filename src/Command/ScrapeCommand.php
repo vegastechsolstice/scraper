@@ -22,6 +22,10 @@ class ScrapeCommand extends Command
      */
     private $scraperService;
 
+    public static function testStatic(){
+        null;
+    }
+
     /**
      * ScrapeCommand constructor.
      * @param string|null $name
