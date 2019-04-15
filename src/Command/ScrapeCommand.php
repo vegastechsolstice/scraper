@@ -1,7 +1,7 @@
 <?php
 namespace App\Command;
 
-use App\Service\ScraperService;
+use App\Service\DellScraperService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -22,10 +22,6 @@ class ScrapeCommand extends Command
      */
     private $scraperService;
 
-    public static function testStatic(){
-        null;
-    }
-
     /**
      * ScrapeCommand constructor.
      * @param string|null $name
@@ -40,6 +36,11 @@ class ScrapeCommand extends Command
         $this->setDescription('Scrapes a website');
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|void|null
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $urls = [
@@ -50,7 +51,7 @@ class ScrapeCommand extends Command
 
         foreach ($urls as $url) {
             $output->writeln('Scraped Page Items:');
-            $this->scraperService = new ScraperService($url);
+            $this->scraperService = new DellScraperService($url);
 
             foreach ($this->scraperService->getItems() as $item) {
                 $output->writeln($item);
